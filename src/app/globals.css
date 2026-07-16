@@ -55,26 +55,7 @@
   --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-hsl: 163, 40%, 4%; /* Deep Forest Obsidian Black background */
-    --bg: hsl(var(--bg-hsl));
-    --card-bg: rgba(12, 22, 19, 0.75);
-    --card-border: rgba(255, 255, 255, 0.06);
 
-    --primary-light: hsl(165, 82%, 35%);
-    --primary-glow: rgba(9, 92, 71, 0.35);
-
-    --text-hsl: 163, 20%, 95%;
-    --text: hsl(var(--text-hsl));
-    --text-muted: hsl(165, 15%, 72%);
-    --text-light: hsl(165, 10%, 58%);
-
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
-  }
-}
 
 /* Global Resets */
 *, *::before, *::after {
@@ -101,11 +82,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
 }
 
-@media (prefers-color-scheme: dark) {
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--white);
-  }
-}
+
 
 a {
   color: inherit;
@@ -194,16 +171,7 @@ button, input, textarea, select {
   transform: translateY(-2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-outline {
-    border-color: var(--white);
-    color: var(--white);
-  }
-  .btn-outline:hover {
-    background-color: var(--white);
-    color: var(--primary-dark);
-  }
-}
+
 
 /* Glassmorphism Card styling */
 .glass-card {
@@ -305,11 +273,7 @@ button, input, textarea, select {
   color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .form-label {
-    color: var(--white);
-  }
-}
+
 
 .form-input {
   width: 100%;
@@ -327,12 +291,7 @@ button, input, textarea, select {
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-@media (prefers-color-scheme: dark) {
-  .form-input:focus {
-    border-color: var(--white);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
-  }
-}
+
 
 /* Typography styles */
 .text-gradient {
@@ -341,13 +300,7 @@ button, input, textarea, select {
   -webkit-text-fill-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--white), var(--accent-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-}
+
 
 .subtitle {
   font-size: 1.1rem;
@@ -372,12 +325,7 @@ button, input, textarea, select {
   color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .badge-primary {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-  }
-}
+
 
 .badge-gold {
   background-color: rgba(212, 163, 89, 0.15);
@@ -428,14 +376,8 @@ button, input, textarea, select {
   color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    color: var(--white);
-  }
-}
-
 .logo-accent {
-  color: #ed2738;
+  color: #6b8e23;
 }
 
 .nav-links {
@@ -581,7 +523,7 @@ body {
   display: none;
   background: none;
   border: none;
-  color: var(--text);
+  color: #6b8e23;
   font-size: 1.8rem;
   cursor: pointer;
   z-index: 1100;

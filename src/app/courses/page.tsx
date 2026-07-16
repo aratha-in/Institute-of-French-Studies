@@ -203,7 +203,8 @@ export default function CoursesPage() {
                   {/* Card Visual Top Accent */}
                   <div style={{
                     height: "120px",
-                    background: "linear-gradient(135deg, var(--primary-light), var(--primary-dark))",
+                    background: "rgba(107, 142, 35, 0.04)",
+                    borderBottom: "1px solid var(--card-border)",
                     position: "relative",
                     padding: "24px",
                     display: "flex",
@@ -213,7 +214,7 @@ export default function CoursesPage() {
                     <span className="badge badge-gold" style={{ position: "absolute", top: "16px", right: "16px" }}>
                       DELF {course.level}
                     </span>
-                    <h3 style={{ color: "var(--white)", fontSize: "1.4rem", fontFamily: "var(--font-serif)" }}>
+                    <h3 style={{ color: "#6b8e23", fontSize: "1.4rem", fontFamily: "var(--font-serif)" }}>
                       {course.title.split(" (")[0]}
                     </h3>
                   </div>
@@ -234,13 +235,13 @@ export default function CoursesPage() {
                       marginBottom: "24px",
                       color: "var(--text-muted)"
                     }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", color: "var(--white)" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <span>📅 Schedule:</span>
-                        <strong style={{ color: "var(--white)" }}>{course.schedule.split(",")[0]}</strong>
+                        <strong style={{ color: "var(--text)" }}>{course.schedule.split(",")[0]}</strong>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "space-between", color: "var(--white)" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <span>⏱️ Duration:</span>
-                        <strong style={{ color: "var(--white)" }}>{course.duration}</strong>
+                        <strong style={{ color: "var(--text)" }}>{course.duration}</strong>
                       </div>
 
                     </div>

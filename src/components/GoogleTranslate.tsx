@@ -91,14 +91,14 @@ export const GoogleTranslate: React.FC = () => {
         onClick={handleToggleLanguage}
         className="lang-toggle-btn"
         style={{
-          backgroundColor: "rgba(255, 255, 255, 0.05)",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
+          backgroundColor: "rgba(107, 142, 35, 0.05)",
+          border: "1px solid rgba(107, 142, 35, 0.3)",
           borderRadius: "50px",
           padding: "8px 16px",
           fontFamily: "var(--font-sans)",
           fontSize: "0.8rem",
           fontWeight: "600",
-          color: "var(--white)",
+          color: "#6b8e23",
           cursor: "pointer",
           display: "inline-flex",
           alignItems: "center",
@@ -144,9 +144,9 @@ export const GoogleTranslate: React.FC = () => {
 
         /* Customize custom toggle button hover states */
         .lang-toggle-btn:hover {
-          background-color: rgba(255, 255, 255, 0.1) !important;
-          border-color: rgba(255, 255, 255, 0.25) !important;
-          box-shadow: 0 0 15px rgba(255, 255, 255, 0.05) !important;
+          background-color: rgba(107, 142, 35, 0.12) !important;
+          border-color: rgba(107, 142, 35, 0.5) !important;
+          box-shadow: 0 0 15px rgba(107, 142, 35, 0.1) !important;
         }
       `}</style>
     </div>
