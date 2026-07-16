@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": "student_frenchstudies_edu",
+      "email": "student@frenchstudies.edu",
+      "name": "student"
+    },
+    {
+      "id": "recruiter_aratha_com",
+      "email": "recruiter@aratha.com",
+      "name": "recruiter"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "userId": "student_frenchstudies_edu",
+      "userEmail": "student@frenchstudies.edu",
+      "courseId": 1,
+      "enrolledAt": "2026-07-14T11:46:17.675Z",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "userId": "recruiter_aratha_com",
+      "userEmail": "recruiter@aratha.com",
+      "courseId": 1,
+      "enrolledAt": "2026-07-14T12:24:42.931Z",
+      "status": "Active"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": 1,
+      "name": "Test User",
+      "email": "test@test.com",
+      "message": "Placement Test Completed.\nScore: 8/10.\nRecommended level placement: DELF B2.",
+      "submittedAt": "2026-07-14T15:22:07.396Z"
+    }
+  ],
+  "certificates": []
+}
