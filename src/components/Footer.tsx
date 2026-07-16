@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link href="/contact" className="footer-link">
-                Contactez-nous (Contact)
+                Contactez-nous
               </Link>
             </li>
           </ul>
@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
 
       <div className="container" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.1)", paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", fontSize: "0.85rem", opacity: 0.7, color: "rgba(255, 255, 255, 0.8)" }}>
         <p>© {new Date().getFullYear()} Francophile French. All rights reserved.</p>
-        <p>Designed with ❤️ for French language enthusiasts.</p>
+        <p>Designed By <a href="https://aratha.in" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline", color: "inherit" }}>Aratha</a></p>
       </div>
 
       <style jsx>{`

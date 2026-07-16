@@ -246,14 +246,22 @@ export default function CoursesPage() {
 
                     </div>
 
-                    <button
-                      onClick={() => handleEnroll(course.id)}
+                    <a
+                      href={`https://wa.me/919000266171?text=${encodeURIComponent(
+                        `Bonjour! I am interested in knowing more about the following course:\n\n` +
+                        `📚 *Course:* ${course.title}\n` +
+                        `🎓 *Level:* DELF ${course.level}\n` +
+                        `📅 *Schedule:* ${course.schedule}\n` +
+                        `⏱️ *Duration:* ${course.duration}\n\n` +
+                        `Please provide more details on how to register. Merci!`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn btn-primary"
-                      style={{ width: "100%", padding: "12px", fontSize: "0.9rem" }}
-                      disabled={enrollSubmitting !== null}
+                      style={{ width: "100%", padding: "12px", fontSize: "0.9rem", textAlign: "center" }}
                     >
-                      {enrollSubmitting === course.id ? "Processing..." : "Know More"}
-                    </button>
+                      Know More
+                    </a>
                   </div>
                 </div>
               ))}

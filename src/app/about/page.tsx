@@ -90,6 +90,63 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* TEF/TCF Bundle Section */}
+      <section className="section" style={{ borderTop: "1px solid var(--card-border)" }}>
+        <div className="container grid-responsive-2" style={{ gap: "60px", alignItems: "center" }}>
+          <div>
+            <span className="badge badge-gold" style={{ marginBottom: "16px" }}>Exam Preparation</span>
+            <h2 style={{ fontSize: "2.4rem", marginBottom: "24px" }}>TEF & TCF (A0 to B2)</h2>
+            <p style={{ marginBottom: "20px", fontSize: "1rem", lineHeight: "1.8", opacity: 0.9 }}>
+              Accelerate your language journey for immigration, university entrance, or career advancement. Our signature TEF/TCF program takes you from absolute beginner (A0) to upper-intermediate (B2) fluency in a highly structured, result-oriented format.
+            </p>
+            <ul style={{ marginBottom: "32px", paddingLeft: "20px", fontSize: "0.95rem", lineHeight: "1.8", opacity: 0.9, display: "flex", flexDirection: "column", gap: "10px" }}>
+              <li>🎯 <strong>Complete Journey:</strong> Covers levels A0, A1, A2, B1, and B2 comprehensively.</li>
+              <li>📝 <strong>Exam Focus:</strong> Specialized modules targeted at the structure of the TEF (Test d'Évaluation de Français) and TCF (Test de Connaissance du Français) exams.</li>
+              <li>🗣️ <strong>Speaking & Writing Labs:</strong> Intensive practice for active communication to maximize your band scores.</li>
+              <li>📊 <strong>Simulated Practice:</strong> Complete full-length mock examinations with detailed feedback from certified FLE instructors.</li>
+            </ul>
+            <a
+              href={`https://wa.me/919000266171?text=${encodeURIComponent(
+                `Bonjour! I want to inquire about the TEF/TCF program (A0 to B2). Please share details regarding schedules, fees, and next batches.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Inquire via WhatsApp
+            </a>
+          </div>
+
+          <div className="glass-card" style={{ padding: "40px", border: "1px solid var(--card-border)", display: "flex", flexDirection: "column", gap: "24px" }}>
+            <h3 style={{ fontSize: "1.6rem", marginBottom: "8px", fontFamily: "var(--font-serif)" }}>Bundle Highlights</h3>
+            
+            <div style={{ display: "flex", gap: "16px" }}>
+              <span style={{ fontSize: "1.8rem" }}>📈</span>
+              <div>
+                <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Structured Syllabus</h4>
+                <p style={{ fontSize: "0.9rem", opacity: 0.8 }}>Tailored lessons designed specifically for test-taking skills, vocabulary building, and syntax mastering.</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "16px" }}>
+              <span style={{ fontSize: "1.8rem" }}>👩‍🏫</span>
+              <div>
+                <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Expert Guidance</h4>
+                <p style={{ fontSize: "0.9rem", opacity: 0.8 }}>Learn from instructors who are certified TEF/TCF exam evaluators with proven score track records.</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "16px" }}>
+              <span style={{ fontSize: "1.8rem" }}>🇨🇦</span>
+              <div>
+                <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Immigration Friendly</h4>
+                <p style={{ fontSize: "0.9rem", opacity: 0.8 }}>Get the exact support required to secure the CLB 7+ band score needed for Canadian immigration.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* History */}
       <section className="section">
         <div className="container" style={{ maxWidth: "800px", textAlign: "center" }}>

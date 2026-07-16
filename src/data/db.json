@@ -27,6 +27,14 @@
       "courseId": 1,
       "enrolledAt": "2026-07-14T12:24:42.931Z",
       "status": "Active"
+    },
+    {
+      "id": 3,
+      "userId": "recruiter_aratha_com",
+      "userEmail": "recruiter@aratha.com",
+      "courseId": 7,
+      "enrolledAt": "2026-07-16T11:50:18.034Z",
+      "status": "Active"
     }
   ],
   "inquiries": [
