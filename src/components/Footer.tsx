@@ -60,13 +60,13 @@ export const Footer: React.FC = () => {
             Contact Info
           </h4>
           <p className="footer-text" style={{ marginBottom: "8px" }}>
-            📍 12 Avenue des Champs-Élysées, 75008 Paris, France
+            📍 29, 401, Hira Mansion, 5-9, opp. to Paigah Plaza, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004
           </p>
           <p className="footer-text" style={{ marginBottom: "8px" }}>
-            📞 +33 (0)1 42 68 53 00
+            📞 +91 9000266171
           </p>
           <p className="footer-text">
-            ✉️ info@instituteoffrenchstudies.edu
+            ✉️ info@francophilefrench.com
           </p>
         </div>
 

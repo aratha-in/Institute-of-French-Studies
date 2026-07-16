@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
     <header className="header-nav">
       <div className="container nav-container">
         <Link href="/" className="logo" onClick={() => setIsMobileMenuOpen(false)}>
-          <span>Francophile <span className="logo-accent">French 🇫🇷</span></span>
+          <span>Francophile <span className="logo-accent">French</span></span>
         </Link>
 
         {/* Mobile Menu Toggle Hamburger */}

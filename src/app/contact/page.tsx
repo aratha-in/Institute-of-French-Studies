@@ -72,11 +72,11 @@ export default function ContactPage() {
           
           {/* Info Side */}
           <div>
-            <span className="badge badge-gold" style={{ marginBottom: "16px" }}>L'Institut de Paris</span>
+            <span className="badge badge-gold" style={{ marginBottom: "16px" }}>L'Institut de Hyderabad</span>
             <h2 style={{ fontSize: "2.2rem", marginBottom: "24px" }}>Francophile French</h2>
             
             <p style={{ marginBottom: "32px", opacity: 0.85, fontSize: "0.95rem", lineHeight: "1.7" }}>
-              Our offices are located in the heart of Paris, right off the Champs-Élysées. Whether visiting in person or joining our global remote classrooms, we look forward to assisting you.
+              Our offices are located in Hyderabad. Whether visiting in person or joining our classes, we look forward to assisting you.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -84,7 +84,7 @@ export default function ContactPage() {
                 <span style={{ fontSize: "1.8rem" }}>📍</span>
                 <div>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Mailing Address</h4>
-                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>12 Avenue des Champs-Élysées, 75008 Paris, France</p>
+                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>29, 401, Hira Mansion, 5-9, opp. to Paigah Plaza, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004</p>
                 </div>
               </div>
 
@@ -92,7 +92,7 @@ export default function ContactPage() {
                 <span style={{ fontSize: "1.8rem" }}>📞</span>
                 <div>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Admissions & Helpdesk</h4>
-                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>+33 (0)1 42 68 53 00 (Mon-Fri, 9:00 AM - 6:00 PM CET)</p>
+                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>+91 9000266171</p>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 <span style={{ fontSize: "1.8rem" }}>✉️</span>
                 <div>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Admissions Email</h4>
-                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>admissions@instituteoffrenchstudies.edu</p>
+                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>info@francophilefrench.com</p>
                 </div>
               </div>
             </div>
