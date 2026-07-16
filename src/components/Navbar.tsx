@@ -26,12 +26,13 @@ export const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Base links available to everyone
   const links = [
     { name: "Home", path: "/" },
     { name: "Cours", path: "/courses" },
     { name: "À Propos", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Tableau de bord", path: "/dashboard" },
+    { name: "Join Us", path: "/join-us" },
   ];
 
   return (

@@ -107,13 +107,8 @@ export default function CoursesPage() {
 
       setEnrollMessage({
         type: "success",
-        text: "Succès! Enrolled successfully. Redirecting to your dashboard..."
+        text: "Succès! Enrolled successfully."
       });
-
-      // Redirect to dashboard after 2 seconds
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 2000);
 
     } catch (err: any) {
       console.error("Enrollment error:", err);

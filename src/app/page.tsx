@@ -109,7 +109,7 @@ export default function Home() {
         <div className="container">
           <div style={{ textAlign: "center", marginBottom: "60px" }}>
             <span className="badge badge-primary" style={{ marginBottom: "12px" }}>Why Study With Us</span>
-            <h2 style={{ fontSize: "2.6rem" }}>The Gold Standard of French Education</h2>
+            <h2 style={{ fontSize: "2.6rem" }}>The Global Standard of French Education</h2>
           </div>
 
           <div className="grid-3">
@@ -149,7 +149,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
             <Link href="/courses" className="btn btn-primary">
-              View Active Courses
+              View Courses
             </Link>
             <Link href="/contact" className="btn btn-outline">
               Contact Admissions
