@@ -12,19 +12,45 @@ declare global {
 // Cookie Helpers
 const getCookie = (name: string): string | null => {
   if (typeof document === "undefined") return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
-  return null;
+  const ca = document.cookie.split(';');
+  const nameEQ = name + "=";
+  const values: string[] = [];
+  
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0) {
+      values.push(c.substring(nameEQ.length, c.length));
+    }
+  }
+  
+  if (values.length === 0) return null;
+  
+  // Prioritize French target if any of the cookie instances are set to French
+  if (values.includes("/fr/fr") || values.includes("/fr/fr/")) {
+    return "/fr/fr";
+  }
+  return values[0];
 };
 
 const setCookie = (name: string, value: string) => {
   if (typeof document === "undefined") return;
-  document.cookie = `${name}=${value}; path=/`;
-  try {
-    document.cookie = `${name}=${value}; path=/; domain=${window.location.hostname}`;
-  } catch (e) {
-    console.error("Failed to set domain cookie", e);
+  
+  // 1. Set host-only cookie
+  document.cookie = `${name}=${value}; path=/; SameSite=Lax`;
+  
+  const host = window.location.hostname;
+  if (host !== "localhost" && host !== "127.0.0.1") {
+    // 2. Set for current hostname explicitly
+    document.cookie = `${name}=${value}; path=/; domain=${host}; SameSite=Lax`;
+    document.cookie = `${name}=${value}; path=/; domain=.${host}; SameSite=Lax`;
+    
+    // 3. Set for parent/root domain to cover subdomains and allow Google Translate script to see it
+    const parts = host.split('.');
+    if (parts.length > 1) {
+      const rootDomain = parts.slice(-2).join('.');
+      document.cookie = `${name}=${value}; path=/; domain=${rootDomain}; SameSite=Lax`;
+      document.cookie = `${name}=${value}; path=/; domain=.${rootDomain}; SameSite=Lax`;
+    }
   }
 };
 
