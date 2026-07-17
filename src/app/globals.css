@@ -638,5 +638,58 @@ body {
   }
 }
 
+/* Social Media Button / Badge styling */
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
 
+.social-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
+.social-link-btn:hover {
+  background: var(--secondary); /* Versailles Gold */
+  color: var(--white);
+  border-color: var(--secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
+}
+
+.social-badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.social-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: rgba(9, 92, 71, 0.04);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition-normal);
+  border: 1px solid rgba(9, 92, 71, 0.08);
+}
+
+.social-badge:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--primary-glow);
+}
