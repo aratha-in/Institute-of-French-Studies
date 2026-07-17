@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDb } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { courses } from "@/data/courses";
 
 export async function GET(
@@ -8,12 +8,26 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const db = readDb();
 
-    // Look up by numerical id or certificate code (case-insensitive)
-    const certificate = db.certificates.find(
-      (c) => c.id.toString() === id || c.certificateNumber.toLowerCase() === id.toLowerCase()
-    );
+    // Look up by numerical id or certificate code (case-insensitive) in Supabase
+    let query = supabase.from("certificates").select("*");
+    const numericalId = parseInt(id, 10);
+
+    if (!isNaN(numericalId)) {
+      query = query.or(`id.eq.${numericalId},certificate_number.ilike.${id}`);
+    } else {
+      query = query.ilike("certificate_number", id);
+    }
+
+    const { data: certificate, error: certError } = await query.maybeSingle();
+
+    if (certError) {
+      console.error("Supabase single certificate query error:", certError);
+      return NextResponse.json(
+        { message: "Failed to query certificate from database." },
+        { status: 500 }
+      );
+    }
 
     if (!certificate) {
       return NextResponse.json(
@@ -23,20 +37,28 @@ export async function GET(
     }
 
     // Find course details
-    const course = courses.find((c) => c.id === certificate.courseId);
-    certificate.course = course || undefined;
+    const course = courses.find((c) => c.id === certificate.course_id);
 
-    // Lookup user name (masking details for public lookups)
-    const user = db.users.find((u) => u.id === certificate.userId);
+    // Lookup user name (masking details for public lookups) from Supabase
+    const { data: user, error: userError } = await supabase
+      .from("users")
+      .select("name")
+      .eq("id", certificate.user_id)
+      .maybeSingle();
+
+    if (userError) {
+      console.error("Supabase user fetch error for certificate:", userError);
+    }
+
     const studentName = user ? user.name : "Registered Student";
 
     return NextResponse.json({
       id: certificate.id,
-      certificateNumber: certificate.certificateNumber,
+      certificateNumber: certificate.certificate_number,
       studentName,
       courseTitle: course ? course.title : "French Course",
       level: course ? course.level : "",
-      issueDate: certificate.issueDate,
+      issueDate: certificate.issue_date,
       grade: certificate.grade,
       status: certificate.status
     });

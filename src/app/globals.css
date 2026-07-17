@@ -524,12 +524,16 @@ body {
   background: none;
   border: none;
   color: #6b8e23;
-  font-size: 1.8rem;
   cursor: pointer;
   z-index: 1100;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 8px;
+  margin-right: -8px;
+  transition: transform var(--transition-fast);
+}
+.mobile-menu-toggle:active {
+  transform: scale(0.9);
 }
 
 @media (max-width: 768px) {

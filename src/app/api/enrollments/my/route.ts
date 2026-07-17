@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/jwt";
-import { readDb } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { courses } from "@/data/courses";
 
 export async function GET(request: Request) {
@@ -24,18 +24,34 @@ export async function GET(request: Request) {
     }
 
     const userId = payload.sub;
-    const db = readDb();
 
-    // Find and populate courses for matching enrollments
-    const userEnrollments = db.enrollments
-      .filter((e) => e.userId === userId)
-      .map((e) => {
-        const course = courses.find((c) => c.id === e.courseId);
-        return {
-          ...e,
-          course: course || null
-        };
-      });
+    // Query enrollments from Supabase
+    const { data: enrollments, error: fetchError } = await supabase
+      .from("enrollments")
+      .select("*")
+      .eq("user_id", userId);
+
+    if (fetchError) {
+      console.error("Supabase my enrollments fetch error:", fetchError);
+      return NextResponse.json(
+        { message: "Failed to retrieve enrollments from database." },
+        { status: 500 }
+      );
+    }
+
+    // Find and populate courses for matching enrollments and convert to camelCase
+    const userEnrollments = enrollments.map((e) => {
+      const course = courses.find((c) => c.id === e.course_id);
+      return {
+        id: e.id,
+        userId: e.user_id,
+        userEmail: e.user_email,
+        courseId: e.course_id,
+        enrolledAt: e.enrolled_at,
+        status: e.status,
+        course: course || null
+      };
+    });
 
     return NextResponse.json(userEnrollments);
   } catch (error) {

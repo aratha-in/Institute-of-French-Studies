@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDb, writeDb } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { signJwt } from "@/lib/jwt";
 
 export async function POST(request: Request) {
@@ -23,14 +23,33 @@ export async function POST(request: Request) {
     const userId = email.replace("@", "_").replace(/\./g, "_");
     const name = email.split("@")[0];
 
-    // Read DB to ensure user is stored
-    const db = readDb();
-    let user = db.users.find((u) => u.id === userId);
+    // Query user in Supabase
+    const { data: user, error: fetchError } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle();
+
+    if (fetchError) {
+      console.error("Supabase fetch user error:", fetchError);
+      return NextResponse.json(
+        { message: "Database query failed." },
+        { status: 500 }
+      );
+    }
 
     if (!user) {
-      user = { id: userId, email, name };
-      db.users.push(user);
-      writeDb(db);
+      const { error: insertError } = await supabase
+        .from("users")
+        .insert({ id: userId, email, name });
+      
+      if (insertError) {
+        console.error("Supabase insert user error:", insertError);
+        return NextResponse.json(
+          { message: "Failed to create user in database." },
+          { status: 500 }
+        );
+      }
     }
 
     // Generate JWT

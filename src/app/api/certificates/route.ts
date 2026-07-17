@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/jwt";
-import { readDb, writeDb, Certificate } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { courses } from "@/data/courses";
 
 export async function POST(request: Request) {
@@ -34,25 +34,46 @@ export async function POST(request: Request) {
       );
     }
 
-    const db = readDb();
     const userId = payload.sub;
 
-    // Find the enrollment
-    const enrollmentIndex = db.enrollments.findIndex(
-      (e) => e.id === enrollmentId && e.userId === userId
-    );
+    // Find the enrollment in Supabase
+    const { data: enrollment, error: enrollError } = await supabase
+      .from("enrollments")
+      .select("*")
+      .eq("id", enrollmentId)
+      .eq("user_id", userId)
+      .maybeSingle();
 
-    if (enrollmentIndex === -1) {
+    if (enrollError) {
+      console.error("Supabase enrollment fetch error:", enrollError);
+      return NextResponse.json(
+        { message: "Failed to retrieve enrollment status." },
+        { status: 500 }
+      );
+    }
+
+    if (!enrollment) {
       return NextResponse.json(
         { message: "Enrollment not found or unauthorized access." },
         { status: 404 }
       );
     }
 
-    const enrollment = db.enrollments[enrollmentIndex];
-
     // Check if certificate already exists for this enrollment
-    const existingCert = db.certificates.find((c) => c.enrollmentId === enrollmentId);
+    const { data: existingCert, error: certCheckError } = await supabase
+      .from("certificates")
+      .select("id")
+      .eq("enrollment_id", enrollmentId)
+      .maybeSingle();
+
+    if (certCheckError) {
+      console.error("Supabase certificate check error:", certCheckError);
+      return NextResponse.json(
+        { message: "Failed to verify certificate existence." },
+        { status: 500 }
+      );
+    }
+
     if (existingCert) {
       return NextResponse.json(
         { message: "A certificate has already been issued for this enrollment." },
@@ -61,36 +82,60 @@ export async function POST(request: Request) {
     }
 
     // Update enrollment status to Completed
-    enrollment.status = "Completed";
-    db.enrollments[enrollmentIndex] = enrollment;
+    const { error: updateError } = await supabase
+      .from("enrollments")
+      .update({ status: "Completed" })
+      .eq("id", enrollmentId);
+
+    if (updateError) {
+      console.error("Supabase enrollment update error:", updateError);
+      return NextResponse.json(
+        { message: "Failed to update enrollment status." },
+        { status: 500 }
+      );
+    }
 
     // Generate certificate details
-    const nextId = db.certificates.length > 0
-      ? Math.max(...db.certificates.map((c) => c.id)) + 1
-      : 1;
-
     const certYear = new Date().getFullYear();
     const certRand = Math.floor(1000 + Math.random() * 9000);
     const certificateNumber = `IFS-${certYear}-${certRand}`;
 
-    const newCertificate: Certificate = {
-      id: nextId,
-      enrollmentId,
-      userId,
-      courseId: enrollment.courseId,
-      issueDate: new Date().toISOString(),
-      grade,
-      certificateNumber,
-      status: "Active"
+    const { data: newCertificate, error: insertError } = await supabase
+      .from("certificates")
+      .insert({
+        enrollment_id: enrollmentId,
+        user_id: userId,
+        course_id: enrollment.course_id,
+        grade,
+        certificate_number: certificateNumber,
+        status: "Active"
+      })
+      .select("*")
+      .single();
+
+    if (insertError) {
+      console.error("Supabase insert certificate error:", insertError);
+      return NextResponse.json(
+        { message: "Failed to issue certificate in database." },
+        { status: 500 }
+      );
+    }
+
+    // Populate course details in response and format fields to camelCase
+    const course = courses.find((c) => c.id === enrollment.course_id);
+    const formattedCertificate = {
+      id: newCertificate.id,
+      enrollmentId: newCertificate.enrollment_id,
+      userId: newCertificate.user_id,
+      courseId: newCertificate.course_id,
+      issueDate: newCertificate.issue_date,
+      grade: newCertificate.grade,
+      certificateNumber: newCertificate.certificate_number,
+      status: newCertificate.status,
+      course: course || null
     };
 
-    db.certificates.push(newCertificate);
-    writeDb(db);
-
-    // Populate course details in response
-    newCertificate.course = courses.find((c) => c.id === enrollment.courseId);
-
-    return NextResponse.json(newCertificate, { status: 201 });
+    return NextResponse.json(formattedCertificate, { status: 201 });
   } catch (error) {
     console.error("POST issue certificate API error:", error);
     return NextResponse.json(

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/jwt";
-import { readDb, writeDb, Enrollment } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { courses } from "@/data/courses";
 
 export async function POST(request: Request) {
@@ -45,12 +45,22 @@ export async function POST(request: Request) {
     const userId = payload.sub;
     const email = payload.email || "unknown@domain.com";
 
-    const db = readDb();
+    // Check if already enrolled in an Active status in Supabase
+    const { data: alreadyEnrolled, error: checkError } = await supabase
+      .from("enrollments")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("course_id", courseId)
+      .eq("status", "Active")
+      .maybeSingle();
 
-    // Check if already enrolled in an Active status
-    const alreadyEnrolled = db.enrollments.some(
-      (e) => e.userId === userId && e.courseId === courseId && e.status === "Active"
-    );
+    if (checkError) {
+      console.error("Supabase enrollment check error:", checkError);
+      return NextResponse.json(
+        { message: "Failed to check enrollment status." },
+        { status: 500 }
+      );
+    }
 
     if (alreadyEnrolled) {
       return NextResponse.json(
@@ -59,27 +69,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Generate enrollment ID
-    const nextId = db.enrollments.length > 0
-      ? Math.max(...db.enrollments.map((e) => e.id)) + 1
-      : 1;
+    // Insert new enrollment in Supabase
+    const { data: newEnrollment, error: insertError } = await supabase
+      .from("enrollments")
+      .insert({
+        user_id: userId,
+        user_email: email,
+        course_id: courseId,
+        status: "Active"
+      })
+      .select("*")
+      .single();
 
-    const newEnrollment: Enrollment = {
-      id: nextId,
-      userId,
-      userEmail: email,
-      courseId,
-      enrolledAt: new Date().toISOString(),
-      status: "Active"
+    if (insertError) {
+      console.error("Supabase insert enrollment error:", insertError);
+      return NextResponse.json(
+        { message: "Failed to submit enrollment to database." },
+        { status: 500 }
+      );
+    }
+
+    // Populate course details and convert to camelCase for frontend compatibility
+    const formattedEnrollment = {
+      id: newEnrollment.id,
+      userId: newEnrollment.user_id,
+      userEmail: newEnrollment.user_email,
+      courseId: newEnrollment.course_id,
+      enrolledAt: newEnrollment.enrolled_at,
+      status: newEnrollment.status,
+      course
     };
 
-    db.enrollments.push(newEnrollment);
-    writeDb(db);
-
-    // Populate course details in response
-    newEnrollment.course = course;
-
-    return NextResponse.json(newEnrollment, { status: 201 });
+    return NextResponse.json(formattedEnrollment, { status: 201 });
   } catch (error) {
     console.error("POST enroll API error:", error);
     return NextResponse.json(

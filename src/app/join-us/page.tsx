@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 export default function JoinUsPage() {
+  const supabase = createClient();
+  
   // Form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,20 +15,37 @@ export default function JoinUsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate network latency
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from("applications")
+        .insert({
+          name,
+          email,
+          position,
+          resume_url: resumeUrl,
+          message
+        });
+
+      if (error) {
+        throw error;
+      }
+
       setSubmitted(true);
       // Reset form
       setName("");
       setEmail("");
       setMessage("");
       setResumeUrl("");
-    }, 1200);
+    } catch (err: any) {
+      console.error("Failed to submit career application:", err);
+      alert(`Failed to submit application: ${err.message || "Please make sure your Supabase database table 'applications' is created."}`);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const positions = [

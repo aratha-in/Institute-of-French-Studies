@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDb, writeDb, Inquiry } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -12,26 +12,27 @@ export async function POST(request: Request) {
       );
     }
 
-    const db = readDb();
+    // Insert inquiry into Supabase (let Supabase handle ID generation)
+    const { data: newInquiry, error } = await supabase
+      .from("inquiries")
+      .insert({
+        name,
+        email,
+        message
+      })
+      .select("id")
+      .single();
 
-    // Generate next inquiry ID
-    const nextId = db.inquiries.length > 0
-      ? Math.max(...db.inquiries.map((i) => i.id)) + 1
-      : 1;
-
-    const newInquiry: Inquiry = {
-      id: nextId,
-      name,
-      email,
-      message,
-      submittedAt: new Date().toISOString()
-    };
-
-    db.inquiries.push(newInquiry);
-    writeDb(db);
+    if (error) {
+      console.error("Supabase insert inquiry error:", error);
+      return NextResponse.json(
+        { message: "Could not submit inquiry. Database write failed." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
-      { message: "Inquiry submitted successfully", id: nextId },
+      { message: "Inquiry submitted successfully", id: newInquiry.id },
       { status: 201 }
     );
   } catch (error) {

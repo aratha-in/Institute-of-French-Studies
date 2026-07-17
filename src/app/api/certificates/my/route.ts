@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/jwt";
-import { readDb } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
 import { courses } from "@/data/courses";
 
 export async function GET(request: Request) {
@@ -24,18 +24,36 @@ export async function GET(request: Request) {
     }
 
     const userId = payload.sub;
-    const db = readDb();
 
-    // Map and populate course details for matching certificates
-    const userCertificates = db.certificates
-      .filter((c) => c.userId === userId)
-      .map((c) => {
-        const course = courses.find((courseItem) => courseItem.id === c.courseId);
-        return {
-          ...c,
-          course: course || null
-        };
-      });
+    // Query certificates from Supabase
+    const { data: certificates, error: fetchError } = await supabase
+      .from("certificates")
+      .select("*")
+      .eq("user_id", userId);
+
+    if (fetchError) {
+      console.error("Supabase my certificates fetch error:", fetchError);
+      return NextResponse.json(
+        { message: "Failed to retrieve certificates from database." },
+        { status: 500 }
+      );
+    }
+
+    // Map and populate course details for matching certificates and convert to camelCase
+    const userCertificates = certificates.map((c) => {
+      const course = courses.find((courseItem) => courseItem.id === c.course_id);
+      return {
+        id: c.id,
+        enrollmentId: c.enrollment_id,
+        userId: c.user_id,
+        courseId: c.course_id,
+        issueDate: c.issue_date,
+        grade: c.grade,
+        certificateNumber: c.certificate_number,
+        status: c.status,
+        course: course || null
+      };
+    });
 
     return NextResponse.json(userCertificates);
   } catch (error) {
