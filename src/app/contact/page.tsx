@@ -92,7 +92,7 @@ export default function ContactPage() {
                 <span style={{ fontSize: "1.8rem" }}>📞</span>
                 <div>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Admissions & Helpdesk</h4>
-                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}>+91 9000266171</p>
+                  <p style={{ fontSize: "0.9rem", opacity: 0.7 }}><span style={{ marginRight: "6px" }}>+91</span>9000-266-171</p>
                 </div>
               </div>
 

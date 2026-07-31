@@ -38,8 +38,16 @@ export const Navbar: React.FC = () => {
   return (
     <header className="header-nav">
       <div className="container nav-container">
-        <Link href="/" className="logo" onClick={() => setIsMobileMenuOpen(false)}>
-          <span>Francophile <span className="logo-accent">French</span></span>
+        <Link href="/" className="logo" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center" }}>
+          <img 
+            src="/logo.svg" 
+            alt="Francophile French Logo" 
+            style={{ 
+              height: "45px", 
+              width: "auto",
+              objectFit: "contain"
+            }} 
+          />
         </Link>
 
         {/* Mobile Menu Toggle Hamburger */}

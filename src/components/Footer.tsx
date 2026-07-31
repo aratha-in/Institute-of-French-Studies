@@ -17,8 +17,17 @@ export const Footer: React.FC = () => {
         
         {/* About Column */}
         <div>
-          <h3 className="footer-title">
-            Francophile French
+          <h3 className="footer-title" style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+            <img 
+              src="/logo.svg" 
+              alt="Francophile French Logo" 
+              style={{ 
+                height: "55px", 
+                width: "auto",
+                objectFit: "contain",
+                filter: "brightness(0) invert(1)"
+              }} 
+            />
           </h3>
           <p className="footer-text" style={{ marginBottom: "16px" }}>
             Promoting French language and culture through premium education, tailored courses, and authentic immersive experiences.
@@ -114,7 +123,7 @@ export const Footer: React.FC = () => {
             📍 29, 401, Hira Mansion, 5-9, opp. to Paigah Plaza, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004
           </p>
           <p className="footer-text" style={{ marginBottom: "8px" }}>
-            📞 +91 9000266171
+            📞 <span style={{ marginRight: "6px" }}>+91</span>9000-266-171
           </p>
           <p className="footer-text">
             ✉️ info@francophilefrench.com

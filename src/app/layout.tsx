@@ -16,7 +16,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Francophile French - Alliance et Excellence",
+  title: "Francophile French",
   description: "Learn French language and immerse yourself in French culture at the premier Francophile French. Offering courses from A1 to C2 DELF levels, professional certifications, and cultural events.",
 };
 
