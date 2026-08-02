@@ -8,6 +8,24 @@ export default function ContactPageClient() {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [lang, setLang] = useState<"en" | "fr">("en");
+
+  React.useEffect(() => {
+    const checkLang = () => {
+      if (typeof document !== "undefined") {
+        const match = document.cookie.match(/googtrans=([^;]+)/);
+        if (match) {
+          const val = match[1].trim();
+          if (val.includes("/en/fr")) {
+            setLang("fr");
+            return;
+          }
+        }
+      }
+      setLang("en");
+    };
+    checkLang();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +125,7 @@ export default function ContactPageClient() {
 
             {/* Social Media Links */}
             <div style={{ marginTop: "40px", borderTop: "1px solid rgba(9, 92, 71, 0.1)", paddingTop: "32px" }}>
-              <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "16px", color: "var(--primary)" }}>Suivez-nous (Follow Us)</h4>
+              <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "16px", color: "var(--primary)" }}>{lang === "en" ? "Follow Us" : "Suivez-nous"}</h4>
               <div className="social-badge-container">
                 <a 
                   href="https://www.instagram.com/francophilefrench/" 

@@ -30,9 +30,9 @@ export const Navbar: React.FC = () => {
   // Base links available to everyone
   const links = [
     { name: "Home", path: "/" },
-    { name: "Cours", path: "/courses" },
-    { name: "À Propos", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "Courses", path: "/courses" },
+    { name: "About Us", path: "/about" },
+    { name: "Contact Us", path: "/contact" },
     { name: "Join Us", path: "/join-us" },
   ];
 

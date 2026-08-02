@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
               className="social-link-btn" 
               aria-label="Facebook"
             >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
               className="social-link-btn" 
               aria-label="LinkedIn"
             >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect x="2" y="9" width="4" height="12"></rect>
                 <circle cx="4" cy="4" r="2"></circle>
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               className="social-link-btn" 
               aria-label="YouTube"
             >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
                 <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
               </svg>
@@ -98,17 +98,17 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link href="/courses" className="footer-link">
-                Nos Cours (Our Courses)
+                Courses
               </Link>
             </li>
             <li>
               <Link href="/about" className="footer-link">
-                À Propos (About Us)
+                About Us
               </Link>
             </li>
             <li>
               <Link href="/contact" className="footer-link">
-                Contactez-nous
+                Contact Us
               </Link>
             </li>
           </ul>
@@ -120,17 +120,15 @@ export const Footer: React.FC = () => {
             Contact Info
           </h4>
           <p className="footer-text" style={{ marginBottom: "8px" }}>
-            📍 29, 401, Hira Mansion, 5-9, opp. to Paigah Plaza, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004
+            📍 Mailing Address: 29, 401, Hira Mansion, 5-9, opp. to Paigah Plaza, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004
           </p>
           <p className="footer-text" style={{ marginBottom: "8px" }}>
-            📞 <span style={{ marginRight: "6px" }}>+91</span>9000-266-171
+            📞 Admissions & Helpdesk: +91 9000-266-171
           </p>
           <p className="footer-text">
             ✉️ info@francophilefrench.com
           </p>
         </div>
-
-
 
       </div>
 
