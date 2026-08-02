@@ -17,11 +17,9 @@ interface Course {
 
 export default function CoursesPageClient() {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedLevel, setSelectedLevel] = useState("ALL");
-  const [enrollSubmitting, setEnrollSubmitting] = useState<number | null>(null);
   const [enrollMessage, setEnrollMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   const { isAuthenticated, token } = useAuth();
@@ -37,7 +35,6 @@ export default function CoursesPageClient() {
         }
         const data = await response.json();
         setCourses(data);
-        setFilteredCourses(data);
       } catch (err: any) {
         console.error("Fetch courses error:", err);
         setError(err.message || "Could not retrieve courses. Make sure the API service is running.");
@@ -49,77 +46,27 @@ export default function CoursesPageClient() {
     fetchCourses();
   }, []);
 
-  // Filter courses by level
-  useEffect(() => {
-    if (selectedLevel === "ALL") {
-      setFilteredCourses(courses);
-    } else {
-      setFilteredCourses(
-        courses.filter((c) => {
-          const lvl = c.level.toUpperCase();
-          const sel = selectedLevel.toUpperCase();
-          if (lvl === sel) return true;
-          if (lvl.includes("-")) {
-            const levelsOrder = ["A0", "A1", "A2", "B1", "B2", "C1", "C2"];
-            const parts = lvl.split("-");
-            if (parts.length === 2) {
-              const minIdx = levelsOrder.indexOf(parts[0]);
-              const maxIdx = levelsOrder.indexOf(parts[1]);
-              const selIdx = levelsOrder.indexOf(sel);
-              if (minIdx !== -1 && maxIdx !== -1 && selIdx !== -1) {
-                return selIdx >= minIdx && selIdx <= maxIdx;
-              }
+  // Filter courses by level dynamically during render to avoid cascading renders
+  const filteredCourses = selectedLevel === "ALL"
+    ? courses
+    : courses.filter((c) => {
+        const lvl = c.level.toUpperCase();
+        const sel = selectedLevel.toUpperCase();
+        if (lvl === sel) return true;
+        if (lvl.includes("-")) {
+          const levelsOrder = ["A0", "A1", "A2", "B1", "B2", "C1", "C2"];
+          const parts = lvl.split("-");
+          if (parts.length === 2) {
+            const minIdx = levelsOrder.indexOf(parts[0]);
+            const maxIdx = levelsOrder.indexOf(parts[1]);
+            const selIdx = levelsOrder.indexOf(sel);
+            if (minIdx !== -1 && maxIdx !== -1 && selIdx !== -1) {
+              return selIdx >= minIdx && selIdx <= maxIdx;
             }
           }
-          return false;
-        })
-      );
-    }
-  }, [selectedLevel, courses]);
-
-  const handleEnroll = async (courseId: number) => {
-    if (!token) {
-      setEnrollMessage({
-        type: "error",
-        text: "Initialisation de votre compte en cours, veuillez patienter..."
+        }
+        return false;
       });
-      return;
-    }
-
-    setEnrollSubmitting(courseId);
-    setEnrollMessage(null);
-
-    try {
-      const response = await fetch("/api/enrollments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ courseId }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Enrollment request failed.");
-      }
-
-      setEnrollMessage({
-        type: "success",
-        text: "Succès! Enrolled successfully."
-      });
-
-    } catch (err: any) {
-      console.error("Enrollment error:", err);
-      setEnrollMessage({
-        type: "error",
-        text: err.message || "An error occurred during enrollment."
-      });
-    } finally {
-      setEnrollSubmitting(null);
-    }
-  };
 
   const levels = ["ALL", "A1", "A2", "B1", "B2", "C1"];
 
@@ -128,7 +75,7 @@ export default function CoursesPageClient() {
       {/* Header */}
       <section className="page-header">
         <div className="container">
-          <span className="badge badge-primary" style={{ marginBottom: "12px" }}>Programmes d'études</span>
+          <span className="badge badge-primary" style={{ marginBottom: "12px" }}>Programmes d&apos;études</span>
           <h1 className="page-title">Nos Cours de Français</h1>
           <p className="subtitle" style={{ margin: "0 auto" }}>
             Explore our curriculum. Choose the right course level to accelerate your language proficiency.

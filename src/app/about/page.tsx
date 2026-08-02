@@ -87,7 +87,7 @@ export default function AboutPage() {
       <section className="page-header">
         <div className="container">
           <span className="badge badge-primary" style={{ marginBottom: "12px" }}>Alliance et Excellence</span>
-          <h1 className="page-title">À Propos de L'Institut</h1>
+          <h1 className="page-title">À Propos de L&apos;Institut</h1>
           <p className="subtitle" style={{ margin: "0 auto" }}>
             Learn about our heritage, teaching philosophy, and commitment to academic excellence.
           </p>
@@ -178,7 +178,7 @@ export default function AboutPage() {
             </p>
             <ul style={{ marginBottom: "32px", paddingLeft: "20px", fontSize: "0.95rem", lineHeight: "1.8", opacity: 0.9, display: "flex", flexDirection: "column", gap: "10px" }}>
               <li>🎯 <strong>Complete Journey:</strong> Covers levels A0, A1, A2, B1, and B2 comprehensively.</li>
-              <li>📝 <strong>Exam Focus:</strong> Specialized modules targeted at the structure of the TEF (Test d'Évaluation de Français) and TCF (Test de Connaissance du Français) exams.</li>
+              <li>📝 <strong>Exam Focus:</strong> Specialized modules targeted at the structure of the TEF (Test d&apos;Évaluation de Français) and TCF (Test de Connaissance du Français) exams.</li>
               <li>🗣️ <strong>Speaking & Writing Labs:</strong> Intensive practice for active communication to maximize your band scores.</li>
               <li>📊 <strong>Simulated Practice:</strong> Complete full-length mock examinations with detailed feedback from certified FLE instructors.</li>
             </ul>
@@ -241,7 +241,7 @@ export default function AboutPage() {
                 What French language certifications are offered by the Institute?
               </h3>
               <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
-                The Institute of French Studies prepares students for the official <strong>DELF</strong> (Diplôme d'Études en Langue Française) and <strong>DALF</strong> (Diplôme Approfondi de Langue Française) certificates issued by the French Ministry of Education, as well as the <strong>TEF</strong> and <strong>TCF</strong> examinations required for Canadian immigration.
+                The Institute of French Studies prepares students for the official <strong>DELF</strong> (Diplôme d&apos;Études en Langue Française) and <strong>DALF</strong> (Diplôme Approfondi de Langue Française) certificates issued by the French Ministry of Education, as well as the <strong>TEF</strong> and <strong>TCF</strong> examinations required for Canadian immigration.
               </p>
             </div>
 
@@ -277,7 +277,7 @@ export default function AboutPage() {
                 Are the teachers at Francophile French certified FLE instructors?
               </h3>
               <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
-                Yes, all our instructors hold Master's degrees in Teaching French as a Foreign Language (<strong>FLE</strong>) or equivalent linguistic credentials, and are certified examiners for official DELF/DALF boards.
+                Yes, all our instructors hold Master&apos;s degrees in Teaching French as a Foreign Language (<strong>FLE</strong>) or equivalent linguistic credentials, and are certified examiners for official DELF/DALF boards.
               </p>
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function AboutPage() {
         <div className="container" style={{ maxWidth: "800px", textAlign: "center" }}>
           <h2 style={{ fontSize: "2.4rem", marginBottom: "20px" }}>Our Mission</h2>
           <p style={{ fontSize: "1.1rem", fontStyle: "italic", lineHeight: "1.8", color: "var(--primary-light)", marginBottom: "32px" }}>
-            "To build bridges of intellectual, economic, and cultural friendship through language excellence."
+            &ldquo;To build bridges of intellectual, economic, and cultural friendship through language excellence.&rdquo;
           </p>
           <p style={{ opacity: 0.8, fontSize: "0.95rem", lineHeight: "1.8", marginBottom: "40px" }}>
             Established to provide world-class French language curriculum, we serve diplomatic missions, multinational corporations, universities, and individual language enthusiasts. As an official testing center, we help hundreds of candidates unlock global mobility and career pathways yearly.

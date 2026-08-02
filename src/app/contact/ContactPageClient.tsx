@@ -90,7 +90,7 @@ export default function ContactPageClient() {
           
           {/* Info Side */}
           <div>
-            <span className="badge badge-gold" style={{ marginBottom: "16px" }}>L'Institut de Hyderabad</span>
+            <span className="badge badge-gold" style={{ marginBottom: "16px" }}>L&apos;Institut de Hyderabad</span>
             <h2 style={{ fontSize: "2.2rem", marginBottom: "24px" }}>Francophile French</h2>
             
             <p style={{ marginBottom: "32px", opacity: 0.85, fontSize: "0.95rem", lineHeight: "1.7" }}>
