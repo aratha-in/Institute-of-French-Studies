@@ -1,11 +1,88 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: "About Our French Language Institute | Institute of French Studies",
+  description: "Learn about our student-oriented French teaching methodology, certified FLE professors, and DELF/DALF framework alignment at the premier Institute.",
+  alternates: {
+    canonical: "https://www.francophilefrench.com/about",
+  },
+  openGraph: {
+    title: "About Our French Language Institute | Institute of French Studies",
+    description: "Discover our heritage, teaching philosophy, and certified DELF/DALF board examiners. Align your learning with standard CEFR guidelines.",
+    url: "https://www.francophilefrench.com/about",
+    type: "website",
+  },
+};
+
 export default function AboutPage() {
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://www.francophilefrench.com/about/#webpage",
+        "url": "https://www.francophilefrench.com/about",
+        "name": "About the Institute of French Studies",
+        "description": "Information about the teaching methodology, DELF framework, and credentials of Francophile French in Hyderabad."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.francophilefrench.com/about/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What French language certifications are offered by the Institute?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Institute of French Studies prepares students for official DELF (Diplôme d'Études en Langue Française) and DALF (Diplôme Approfondi de Langue Française) certificates issued by the French Ministry of Education, as well as the TEF and TCF examinations required for Canadian immigration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the institute align French courses with the CEFR framework?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, all our courses strictly follow the Common European Framework of Reference for Languages (CEFR). We offer structured progressions for levels A1 (beginner), A2 (elementary), B1 (intermediate), B2 (upper-intermediate), and C1/C2 (advanced mastery)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is the Institute of French Studies located, and how can I contact admissions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our campus is located at 29, 401, Hira Mansion, 5-9, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004, India. You can contact our admissions desk via phone or WhatsApp at +91-9000-266-171, or via email at info@francophilefrench.com."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the TEF/TCF Canada prep bundle?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our specialized TEF and TCF Canada bundle is designed to take candidates from beginner fluency (A0) to upper-intermediate proficiency (B2), targeting the CLB 7+ band scores needed for Canadian immigration Express Entry."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are the teachers at Francophile French certified FLE instructors?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, all our instructors hold Master's degrees in Teaching French as a Foreign Language (FLE) or equivalent linguistic credentials, and are certified examiners for official DELF/DALF boards."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+      />
+
       {/* Header */}
       <section className="page-header">
         <div className="container">
@@ -142,6 +219,66 @@ export default function AboutPage() {
                 <h4 style={{ fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>Immigration Friendly</h4>
                 <p style={{ fontSize: "0.9rem", opacity: 0.8 }}>Get the exact support required to secure the CLB 7+ band score needed for Canadian immigration.</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AEO FAQ Section */}
+      <section className="section" style={{ backgroundColor: "rgba(11,37,91,0.02)", borderTop: "1px solid var(--card-border)" }}>
+        <div className="container">
+          <div style={{ textAlign: "center", marginBottom: "60px" }}>
+            <span className="badge badge-primary" style={{ marginBottom: "12px" }}>Questions Fréquentes</span>
+            <h2 style={{ fontSize: "2.5rem" }}>Frequently Asked Questions</h2>
+            <p className="subtitle" style={{ margin: "0 auto" }}>
+              Direct answers to common questions about French language courses at our Hyderabad center.
+            </p>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "800px", margin: "0 auto" }}>
+            <div className="glass-card" style={{ padding: "28px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "12px", color: "var(--primary)" }}>
+                What French language certifications are offered by the Institute?
+              </h3>
+              <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
+                The Institute of French Studies prepares students for the official <strong>DELF</strong> (Diplôme d'Études en Langue Française) and <strong>DALF</strong> (Diplôme Approfondi de Langue Française) certificates issued by the French Ministry of Education, as well as the <strong>TEF</strong> and <strong>TCF</strong> examinations required for Canadian immigration.
+              </p>
+            </div>
+
+            <div className="glass-card" style={{ padding: "28px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "12px", color: "var(--primary)" }}>
+                Does the institute align French courses with the CEFR framework?
+              </h3>
+              <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
+                Yes, all our courses strictly follow the Common European Framework of Reference for Languages (<strong>CEFR</strong>). We offer structured progressions for levels <strong>A1</strong> (beginner), <strong>A2</strong> (elementary), <strong>B1</strong> (intermediate), <strong>B2</strong> (upper-intermediate), and <strong>C1/C2</strong> (advanced mastery).
+              </p>
+            </div>
+
+            <div className="glass-card" style={{ padding: "28px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "12px", color: "var(--primary)" }}>
+                Where is the Institute of French Studies located, and how can I contact admissions?
+              </h3>
+              <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
+                Our campus is located at <strong>29, 401, Hira Mansion, 5-9, Hill Fort, Adarsh Nagar, Hyderabad, Telangana 500004, India</strong>. You can contact our admissions desk via phone or WhatsApp at <strong>+91-9000-266-171</strong>, or via email at <strong>info@francophilefrench.com</strong>.
+              </p>
+            </div>
+
+            <div className="glass-card" style={{ padding: "28px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "12px", color: "var(--primary)" }}>
+                What is the TEF/TCF Canada prep bundle?
+              </h3>
+              <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
+                Our specialized <strong>TEF and TCF Canada bundle</strong> is designed to take candidates from beginner fluency (A0) to upper-intermediate proficiency (B2), targeting the <strong>CLB 7+</strong> band scores needed for Canadian immigration Express Entry.
+              </p>
+            </div>
+
+            <div className="glass-card" style={{ padding: "28px" }}>
+              <h3 style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "12px", color: "var(--primary)" }}>
+                Are the teachers at Francophile French certified FLE instructors?
+              </h3>
+              <p style={{ fontSize: "0.95rem", opacity: 0.85, lineHeight: "1.6" }}>
+                Yes, all our instructors hold Master's degrees in Teaching French as a Foreign Language (<strong>FLE</strong>) or equivalent linguistic credentials, and are certified examiners for official DELF/DALF boards.
+              </p>
             </div>
           </div>
         </div>
