@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import GoogleTranslate from "./GoogleTranslate";
 
@@ -40,9 +41,12 @@ export const Navbar: React.FC = () => {
     <header className="header-nav">
       <div className="container nav-container">
         <Link href="/" className="logo" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center" }}>
-          <img 
+          <Image 
             src="/logo.svg" 
             alt="Francophile French Logo" 
+            height={45}
+            width={120}
+            priority
             style={{ 
               height: "45px", 
               width: "auto",

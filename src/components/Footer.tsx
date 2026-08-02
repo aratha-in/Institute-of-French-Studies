@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Footer: React.FC = () => {
   return (
@@ -18,9 +19,11 @@ export const Footer: React.FC = () => {
         {/* About Column */}
         <div>
           <h3 className="footer-title" style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-            <img 
+            <Image 
               src="/logo.svg" 
               alt="Francophile French Logo" 
+              height={55}
+              width={150}
               style={{ 
                 height: "55px", 
                 width: "auto",

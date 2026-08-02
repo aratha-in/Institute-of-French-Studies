@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -103,16 +104,8 @@ export const GoogleTranslate: React.FC = () => {
       }
     };
 
-    // Load Translate script if not present
-    const scriptId = "google-translate-script";
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.type = "text/javascript";
-      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
-    } else if (window.google && window.google.translate && window.googleTranslateElementInit) {
+    // If google elements are already loaded, trigger init directly
+    if (window.google && window.google.translate && window.googleTranslateElementInit) {
       window.googleTranslateElementInit();
     }
   }, []);
@@ -126,6 +119,11 @@ export const GoogleTranslate: React.FC = () => {
 
   return (
     <div className="language-toggle-wrapper" style={{ display: "inline-block", marginRight: "12px", verticalAlign: "middle" }}>
+      <Script 
+        id="google-translate-script"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        strategy="lazyOnload"
+      />
       {/* Google Translate element target node (must exist but can be hidden) */}
       <div id="google_translate_element" style={{ display: "none" }}></div>
       
