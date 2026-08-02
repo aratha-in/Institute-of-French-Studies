@@ -11,6 +11,7 @@ export const Navbar: React.FC = () => {
 
   // Close mobile menu when page route changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [pathname]);
 

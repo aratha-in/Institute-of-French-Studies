@@ -5,7 +5,24 @@ import React, { useEffect, useState } from "react";
 declare global {
   interface Window {
     googleTranslateElementInit?: () => void;
-    google?: any;
+    google?: {
+      translate?: {
+        TranslateElement: {
+          new (
+            options: {
+              pageLanguage: string;
+              includedLanguages: string;
+              layout: number;
+              autoDisplay: boolean;
+            },
+            elementId: string
+          ): any;
+          InlineLayout: {
+            SIMPLE: number;
+          };
+        };
+      };
+    };
   }
 }
 
@@ -17,7 +34,7 @@ const getCookie = (name: string): string | null => {
   const values: string[] = [];
   
   for (let i = 0; i < ca.length; i++) {
-    let c = ca[i].trim();
+    const c = ca[i].trim();
     if (c.indexOf(nameEQ) === 0) {
       values.push(c.substring(nameEQ.length, c.length));
     }
@@ -26,8 +43,8 @@ const getCookie = (name: string): string | null => {
   if (values.length === 0) return null;
   
   // Prioritize French target if any of the cookie instances are set to French
-  if (values.includes("/fr/fr") || values.includes("/fr/fr/")) {
-    return "/fr/fr";
+  if (values.includes("/en/fr") || values.includes("/en/fr/")) {
+    return "/en/fr";
   }
   return values[0];
 };
@@ -60,16 +77,15 @@ export const GoogleTranslate: React.FC = () => {
   useEffect(() => {
     // Determine language from cookie
     const cookieVal = getCookie("googtrans");
-    if (cookieVal === "/fr/fr" || cookieVal === "/fr/fr/") {
+    if (cookieVal === "/en/fr" || cookieVal === "/en/fr/") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentLang("fr");
-    } else {
-      setCurrentLang("en");
     }
 
     // Set English as default language by writing the Google Translate cookie if not already set
     const hasTransCookie = document.cookie.split(';').some((item) => item.trim().startsWith('googtrans='));
     if (!hasTransCookie) {
-      setCookie("googtrans", "/fr/en");
+      setCookie("googtrans", "/en/en");
     }
 
     // Define the init function on window (required by Google script)
@@ -77,7 +93,7 @@ export const GoogleTranslate: React.FC = () => {
       if (window.google && window.google.translate) {
         new window.google.translate.TranslateElement(
           {
-            pageLanguage: "fr",
+            pageLanguage: "en",
             includedLanguages: "en,fr",
             layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
@@ -103,7 +119,7 @@ export const GoogleTranslate: React.FC = () => {
 
   const handleToggleLanguage = () => {
     const nextLang = currentLang === "en" ? "fr" : "en";
-    setCookie("googtrans", `/fr/${nextLang}`);
+    setCookie("googtrans", `/en/${nextLang}`);
     // Refresh page to apply Google translation immediately
     window.location.reload();
   };
@@ -166,6 +182,28 @@ export const GoogleTranslate: React.FC = () => {
         .skiptranslate iframe,
         .goog-te-gadget {
           display: none !important;
+        }
+
+        /* Prevent Google Translate banner from showing and pushing content down */
+        body {
+          top: 0 !important;
+        }
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame,
+        .goog-te-banner,
+        .goog-tooltip,
+        #goog-gt-tt {
+          display: none !important;
+          visibility: hidden !important;
+        }
+        .goog-tooltip:hover {
+          display: none !important;
+          visibility: hidden !important;
+        }
+        .goog-text-highlight {
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
         }
 
         /* Customize custom toggle button hover states */
