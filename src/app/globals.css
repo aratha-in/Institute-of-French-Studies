@@ -380,6 +380,29 @@ button, input, textarea, select {
   color: #ed2738;
 }
 
+.nav-logo-image {
+  height: 45px !important;
+  width: auto !important;
+  object-fit: contain;
+}
+
+.footer-logo-image {
+  height: 55px !important;
+  width: auto !important;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 480px) {
+  .nav-logo-image {
+    height: 35px !important;
+  }
+  
+  .footer-logo-image {
+    height: 45px !important;
+  }
+}
+
 .nav-links {
   display: flex;
   align-items: center;

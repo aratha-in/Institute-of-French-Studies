@@ -45,13 +45,9 @@ export const Navbar: React.FC = () => {
             src="/logo.svg" 
             alt="Francophile French Logo" 
             height={45}
-            width={120}
+            width={212}
             priority
-            style={{ 
-              height: "45px", 
-              width: "auto",
-              objectFit: "contain"
-            }} 
+            className="nav-logo-image"
           />
         </Link>
 

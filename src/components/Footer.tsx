@@ -23,13 +23,8 @@ export const Footer: React.FC = () => {
               src="/logo.svg" 
               alt="Francophile French Logo" 
               height={55}
-              width={150}
-              style={{ 
-                height: "55px", 
-                width: "auto",
-                objectFit: "contain",
-                filter: "brightness(0) invert(1)"
-              }} 
+              width={259}
+              className="footer-logo-image"
             />
           </h3>
           <p className="footer-text" style={{ marginBottom: "16px" }}>
