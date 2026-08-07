@@ -80,6 +80,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jakarta.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9HQ6R10HG"></script>
+        <script dangerouslySetInnerHTML={{ __html: "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W9HQ6R10HG');" }} />
+      </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
       </body>

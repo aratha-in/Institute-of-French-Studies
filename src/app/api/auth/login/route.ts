@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { signJwt } from "@/lib/jwt";
+import { generateToken, signSessionId } from "@/lib/auth";
+
 
 export async function POST(request: Request) {
   try {
@@ -59,14 +61,28 @@ export async function POST(request: Request) {
       name: name
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       token,
-      user: {
-        id: userId,
-        email,
-        name
-      }
+      user: { id: userId, email, name },
     });
+    response.cookies.set({
+      name: "session_id",
+      value: signSessionId(userId),
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/api",
+    });
+    response.cookies.set({
+      name: "refresh_token",
+      value: generateToken(48),
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+    return response;
   } catch (error) {
     console.error("Login API error:", error);
     return NextResponse.json(
